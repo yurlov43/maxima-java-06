@@ -9,7 +9,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello Spring!" );
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
 
         Logistics logistics = context.getBean(Logistics.class);

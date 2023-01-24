@@ -1,9 +1,12 @@
 package org.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
+@PropertySource("classpath:application.properties")
 public class Logistics {
     private Transport[] vehicles;
 
@@ -11,8 +14,14 @@ public class Logistics {
     }
 
     @Autowired
-    public Logistics(Transport[] vehicles) {
+    public Logistics(Transport[] vehicles,
+                     TransportFactory transportFactory,
+                     City city, @Value("${logistics.weight}") int weight,
+                     @Value("${logistics.hours}") int hours) {
         this.vehicles = vehicles;
+        if (vehicles.length == 0) {
+            this.vehicles = new Transport[]{transportFactory.getTransport(city, weight, hours)};
+        }
     }
 
     public Transport[] getVehicles() {

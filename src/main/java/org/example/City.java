@@ -1,16 +1,26 @@
 package org.example;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+
+@Component
+@PropertySource("classpath:application.properties")
 public class City {
+    @Value("${city.name}")
     private String name;
+    @Value("${city.distanceKm}")
     private int distanceKm;
+    @Value("${city.hasAirport}")
     private boolean hasAirport;
+    @Value("${city.isOnWater}")
     private boolean isOnWater;
 
     public City() {
     }
 
     public City(String name, int distanceKm) {
-        this(name, distanceKm, false, true);
+        this(name, distanceKm, true, true);
     }
 
     public City(String name, int distanceKm, boolean hasAirport, boolean isOnWater) {

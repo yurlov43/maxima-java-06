@@ -1,5 +1,7 @@
 package org.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +12,11 @@ public class Ship  extends Transport{
     public Ship() {
     }
 
-    public Ship(String name, int capacity, int speed, float costOfKm) {
+    @Autowired
+    public Ship(@Value("${ship.name}") String name,
+                @Value("${ship.capacity}") int capacity,
+                @Value("${ship.speed}") int speed,
+                @Value("${ship.costOfKm}") float costOfKm) {
         super(name, capacity, speed, costOfKm);
     }
 
